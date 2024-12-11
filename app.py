@@ -75,12 +75,29 @@ def main():
     if st.session_state.page == "Home":
         st.title("Welcome to the AI Chatbot! 🤖")
         st.write("""
-        This chatbot leverages **NLP** and **Logistic Regression** to interact with users intelligently.  
-        Navigate through the sections to learn more or start chatting! 🎉
+        Hello! This is your interactive AI chatbot assistant. 🎉
+        
+        **How to Start Chatting:**
+        - Navigate to the **Chatbot** section from the sidebar.
+        - Type your message and let the chatbot assist you!
+        
+        Enjoy exploring the other sections like **History** to view past conversations or **About** to learn more about the project. 😊
         """)
 
     elif st.session_state.page == "Chatbot":
         st.title("💬 Chat with the Bot")
+        st.markdown("""
+        <style>
+        .chat-icon {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
         st.write("Type your message below and let’s get started!")
 
         # Check if the chat log exists
@@ -93,7 +110,7 @@ def main():
         user_input = st.text_input("👤 You:", placeholder="Type your message here...")
         if user_input:
             response = chatbot(user_input)
-            st.markdown(f"**🤖 Chatbot:** {response}")
+            st.markdown(f"<span class='chat-icon'>🤖</span> **Chatbot:** {response}", unsafe_allow_html=True)
 
             # Save chat log
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -122,16 +139,64 @@ def main():
     elif st.session_state.page == "About":
         st.title("ℹ️ About the Chatbot Project")
         st.write("""
-        This chatbot uses **NLP** and **Logistic Regression** to classify intents and respond intelligently.  
-        The interface is built using **Streamlit** for a user-friendly experience. 🎉
+        This chatbot uses **NLP** and **Logistic Regression** to classify intents and respond intelligently. 🎉
+        
+        **Documentation Section:**
+        - **Technologies Used:** Python, Streamlit, NLTK, scikit-learn.
+        - **Training:** Utilized TfidfVectorizer and Logistic Regression for intent classification.
+        - **Dataset:** Custom JSON file containing intents and patterns.
+        - **Features:**
+          - Real-time chatting with conversational logging.
+          - Easy navigation with a user-friendly interface.
+          - Expandable for future features like sentiment analysis.
+        
+        For more details, explore the project documentation and source code!
         """)
 
     elif st.session_state.page == "Social Media":
-        st.title("🌐 Connect with Me")
-        st.write("Follow me on my social platforms:")
-        st.markdown("[![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png)](https://github.com/Ahmad-Raza810) **GitHub**")
-        st.markdown("[![LinkedIn](https://img.icons8.com/ios-glyphs/30/000000/linkedin.png)](https://www.linkedin.com/in/ahmad-raza-09062a323/) **LinkedIn**")
-        st.markdown("[![Instagram](https://img.icons8.com/ios-glyphs/30/000000/instagram-new.png)](https://www.instagram.com/ahhmad____77/) **Instagram**")
+      st.title("🌐 Connect with Me")
+      st.write("Follow me on my social platforms:")
+
+      # HTML for unique, colorful icons with hover effect
+      social_media_html = """
+      <style>
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #0073e6; /* Light Blue Hover Effect */
+        }
+        .social-icons img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: box-shadow 0.3s;
+        }
+        .social-icons img:hover {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+      </style>
+      <div class="social-icons">
+        <a href="https://github.com/Ahmad-Raza810" target="_blank">
+            <img src="https://img.icons8.com/color/96/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/ahmad-raza-09062a323/" target="_blank">
+            <img src="https://img.icons8.com/color/96/linkedin-circled.png" alt="LinkedIn">
+        </a>
+        <a href="https://www.instagram.com/ahhmad____77/" target="_blank">
+            <img src="https://img.icons8.com/color/96/instagram-new.png" alt="Instagram">
+        </a>
+      </div>
+      """
+      st.markdown(social_media_html, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
